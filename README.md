@@ -22,7 +22,7 @@ npm start
 Not: Projede kullanılan veritabanı veya API bağlantısı varsa `.env` dosyasını yapılandırmanız gerekebilir.
 
 ## 4. Kullanım
-Uygulamayı çalıştırdıktan sonra tarayıcınızda `http://localhost:3000` adresine giderek sohbet sistemini test edebilirsiniz. Yeni kullanıcılar kaydolabilir ve giriş yaptıktan sonra mesajlaşmaya başlayabilir.
+Uygulamayı çalıştırdıktan sonra tarayıcınızda `http://localhost:5173` adresine giderek sohbet sistemini test edebilirsiniz. Yeni kullanıcılar kaydolabilir ve giriş yaptıktan sonra mesajlaşmaya başlayabilir.
 
 ## 5. Özellikler
 - Gerçek zamanlı mesajlaşma
