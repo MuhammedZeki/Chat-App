@@ -7,9 +7,9 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { app, server } = require("./lib/socket");
 const PORT = process.env.PORT || 3000;
-
+const path = require("path");
 config();
-
+const __dirname = path.resolve();
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -21,6 +21,13 @@ app.use(
 
 app.use("/auth", AuthRoutes);
 app.use("/messages", MessageRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  app.get("*", (req, res) => {
+    res.send(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
 
 server.listen(PORT, () => {
   connectDB();

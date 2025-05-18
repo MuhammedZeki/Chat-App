@@ -2,7 +2,8 @@ import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
-const SERVER_URL = "http://localhost:3000";
+const SERVER_URL =
+  import.meta.env.MODE === "development" ? "http://localhost:3000" : "/";
 export const useAuthStore = create((set, get) => ({
   authUser: null,
   isSigningUp: false,
@@ -14,7 +15,7 @@ export const useAuthStore = create((set, get) => ({
   checkAuth: async () => {
     set({ isCheckingAuth: true });
     try {
-      const res = await axiosInstance.get("/auth/check");
+      const res = await axiosInstance.get("auth/check");
       if (res.status === 200) {
         set({ authUser: res.data });
         get().connectSocket();
@@ -29,7 +30,7 @@ export const useAuthStore = create((set, get) => ({
   signup: async (data) => {
     set({ isSigningUp: true });
     try {
-      const res = await axiosInstance.post("/auth/signUp", data);
+      const res = await axiosInstance.post("auth/signUp", data);
       if (res.status === 201) {
         set({ authUser: res.data });
         toast.success("Account created successfully!");
@@ -44,7 +45,7 @@ export const useAuthStore = create((set, get) => ({
   login: async (data) => {
     set({ isLoggingIn: true });
     try {
-      const res = await axiosInstance.post("/auth/login", data);
+      const res = await axiosInstance.post("auth/login", data);
       if (res.status === 200) {
         set({ authUser: res.data });
         toast.success("Logged in successfully!");
@@ -60,7 +61,7 @@ export const useAuthStore = create((set, get) => ({
   updateProfile: async (data) => {
     set({ isUpdatingProfile: true });
     try {
-      const res = await axiosInstance.put("/auth/updated-profile", data);
+      const res = await axiosInstance.put("auth/updated-profile", data);
       if (res.status === 200) {
         console.log(res.data);
         set({ authUser: res.data });
@@ -74,7 +75,7 @@ export const useAuthStore = create((set, get) => ({
   },
   logout: async () => {
     try {
-      const res = await axiosInstance.post("/auth/logout");
+      const res = await axiosInstance.post("auth/logout");
       if (res.status === 200) {
         set({ authUser: null });
         get().disconnectSocket();
