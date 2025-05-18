@@ -9,7 +9,6 @@ const { app, server } = require("./lib/socket");
 const PORT = process.env.PORT || 3000;
 const path = require("path");
 config();
-const __dirname = path.resolve();
 app.use(express.json());
 app.use(cookieParser());
 app.use(
