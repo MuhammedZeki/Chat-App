@@ -49,7 +49,7 @@ exports.login = async (req, res) => {
     }
     const isUser = await User.findOne({ email: email });
     if (!isUser) {
-      return res.statu(400).json({ message: "Email not found!" });
+      return res.status(400).json({ message: "Email not found!" });
     }
     const passwordCorrect = await bcrypt.compare(password, isUser.password);
     if (!passwordCorrect) {
